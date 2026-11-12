@@ -2,6 +2,7 @@ package productmanagement;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.Scanner;
@@ -63,6 +64,57 @@ public void inserttable() {
 	}
 	
 }
+
+String displayall="select * from productdetails";
+public void viewalldetails() {
+	try {
+		Statement st= conn.createStatement();
+	  ResultSet rs	=st.executeQuery(displayall);
+	  while(rs.next()) // true or false
+	  {
+		  System.out.println("product id:"+rs.getInt("productid")
+		  +",product name:"+rs.getString("productname")+
+		  ",product price:"+rs.getDouble("productprice")
+		  +",qty:"+rs.getDouble("qty")+",order date:"+rs.getString("dates"));
+	  }
+	} catch (SQLException e) {
+		// TODO Auto-generated catch block
+System.out.println(e.getMessage());
+	}
+	
+	
+	
+}
+
+String displaybyid="select * from productdetails where productid=?";
+
+public void viewdetails() {
+	System.out.println("Enter your productid");
+	int productid=sc.nextInt();
+	
+	try {
+		PreparedStatement ps= conn.prepareStatement(displaybyid);
+		ps.setInt(1, productid);
+	ResultSet rs	=ps.executeQuery();
+	
+	if(rs.next()) {
+		
+	
+			System.out.println("product id:"+rs.getInt("productid")
+			  +",product name:"+rs.getString("productname")+
+			  ",product price:"+rs.getDouble("productprice")
+			  +",qty:"+rs.getDouble("qty")+",order date:"+rs.getString("dates"));
+		
+	}else {
+		System.out.println("not present product");
+	}
+	} catch (SQLException e) {
+		// TODO Auto-generated catch block
+		System.out.println(e.getMessage());
+	}
+	
+}
+
 
 
 }
