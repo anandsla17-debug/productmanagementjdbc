@@ -19,6 +19,8 @@ do {
 	System.out.println("2.insert product details");
 	System.out.println("3.view all product details");
 	System.out.println("4.view product details by id");
+	System.out.println("5.update product details by id");
+	System.out.println("6.delete product details by id");
 	System.out.println("0.exit");
 	System.out.print("Enter your option:");
 	choice=sc.nextInt();
@@ -36,7 +38,12 @@ break;
 	case 4:
 		productlogic.viewdetails();
 		break;
-
+	case 5:
+		productlogic.updatedetials();
+		break;
+	case 6:
+		productlogic.deleteproduct();
+		break;
 	case 0:
 		System.out.println("exit....");
 		break;
