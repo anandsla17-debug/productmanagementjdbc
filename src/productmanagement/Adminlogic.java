@@ -74,12 +74,14 @@ Scanner sc= new Scanner(System.in);
 			ResultSet rs=ps.executeQuery();
 			if(rs.next()) {
 				System.out.println("login successfull");
+				System.out.println("!welcome "+rs.getString("name"));
 				Productlogic productlogic= new Productlogic();
 
 
 
 				int choice=0;
 				Scanner sc= new Scanner(System.in);
+				
 
 				do {
 					System.out.println("---Product management System---");
@@ -89,6 +91,7 @@ Scanner sc= new Scanner(System.in);
 					System.out.println("4.view product details by id");
 					System.out.println("5.update product details by id");
 					System.out.println("6.delete product details by id");
+					System.out.println("7.view all admin data");
 					System.out.println("0.exit");
 					System.out.print("Enter your option:");
 					choice=sc.nextInt();
@@ -112,6 +115,8 @@ Scanner sc= new Scanner(System.in);
 					case 6:
 						productlogic.deleteproduct();
 						break;
+					case 7:
+						displayadmin();
 					case 0:
 						System.out.println("exit....");
 						break;
@@ -128,9 +133,23 @@ Scanner sc= new Scanner(System.in);
 			System.out.println(e.getMessage());
 		}
 	}
-	public static void main(String[] args) {
+	
+	String display="select * from admin";
+	
+	public void displayadmin() {
+		try {
+			Statement st=conn.createStatement();
+			ResultSet rs=st.executeQuery(display);
+			while(rs.next()) {
+				System.out.println("admin id:"+rs.getInt("adminid")+",adnin name:"+rs.getString("name"));
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			System.out.println(e.getMessage());
+		}
 		
 	}
+
 	
 	
 }
