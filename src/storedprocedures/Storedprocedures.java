@@ -33,7 +33,7 @@ Connection conn=	dbconnection.dbconnection();// key =>username,password,url
 		
 	}
 	
-	String call="{insertdisplay(?,?,?,?,?)}";
+	String call="{call insertdisplay(?,?,?,?,?)}";
 	public void Callprocedure() {
 		System.out.println("--store form--");
 		Scanner sc= new Scanner(System.in);
@@ -60,7 +60,9 @@ Connection conn=	dbconnection.dbconnection();// key =>username,password,url
 		if(output) {
 			      ResultSet rs  =cs.getResultSet();
 			      while(rs.next()) {
-			    	  System.out.println("product id:"+rs.getInt("productid"));
+			    	  System.out.println("product id:"+rs.getInt("productid")+"product name:"+
+			      rs.getString("productname")+",price:"+rs.getDouble("productprice")
+			      +"qty:"+rs.getInt("qty")+",date:"+rs.getString("dates"));
 			      }
 		}
 		
